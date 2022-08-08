@@ -1,21 +1,7 @@
-# https://restcountries.com/v2/name/{name}
-#
-# from restcountries import RestCountryApiV2 as rapi
-#
-# def foo(name):
-#     country_list = rapi.get_countries_by_name('France')
-
-
-# '''
-# Basically grab the country data obj
-# parse it,
-# Put it in a dictionary with key as city, capital as value
-# Make string message with either city or cap accessing the dict
-#
-# '''
-
+from urllib import parse
 from http.server import BaseHTTPRequestHandler
-from datetime import datetime
+import requests
+import json
 
 
 class handler(BaseHTTPRequestHandler):
@@ -24,5 +10,20 @@ class handler(BaseHTTPRequestHandler):
     self.send_response(200)
     self.send_header('Content-type', 'text/plain')
     self.end_headers()
-    self.wfile.write(str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')).encode())
+    country_name = "Chile"
+    capital = "Santiago"
+    api_url = f"https://restcountries.com/v3.1/name/{country_name}"
+    api_capital = f"https://restcountries.com/v2/capital/{capital}"
+    response = requests.get(api_url)
+    json_data = json.loads(response.text)
+    country_capital = json_data[0]['capital']
+    message = f" The capital of {country_name} is {country_capital}  "
+    self.wfile.write(message.encode())
     return
+
+
+# url = "https://restcountries.com/v3.1/name/peru"
+#
+# response = requests.get(url)
+
+
