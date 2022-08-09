@@ -17,13 +17,11 @@ class handler(BaseHTTPRequestHandler):
     response = requests.get(api_url)
     json_data = json.loads(response.text)
     country_capital = json_data[0]['capital']
-    message = f" The capital of {country_name} is {country_capital}  "
+    message = f" The capital of {country_name} is {country_capital} "
+    message_capital = f" {country_capital} is the capital of {country_name} "
     self.wfile.write(message.encode())
+    self.wfile.write(message_capital.encode())
     return
 
-
-# url = "https://restcountries.com/v3.1/name/peru"
-#
-# response = requests.get(url)
 
 
