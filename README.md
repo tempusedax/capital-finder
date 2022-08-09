@@ -1,3 +1,3 @@
 # vercel
 
-deploy site <https://www.capital-finder-marvin-g7jd0kygz-tempusedax.vercel.app>
+deploy site https://vercel.com/tempusedax/capital-finder-marvin
